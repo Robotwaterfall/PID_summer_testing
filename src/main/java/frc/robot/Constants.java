@@ -13,6 +13,26 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+  public final static class armConstants{
+
+    public final static double kMaxArmPower = 0.5; // Maximum power for the arm motor
+
+    public final static int kArmMotorPort = 1; // Port number for the arm motor
+ 
+    // PID
+    public final static double kArmkp = 0;
+    public final static double kArmki = 0;
+    public final static double kArmkd = 0;
+  }
+
+  public final static class OIConstants{
+    public final static int kControllerPort = 0;
+  }
+
+  public final static class dismountConstants{
+    public final static int kDismountMotorPort = 2;
+  }
   
   }
 
