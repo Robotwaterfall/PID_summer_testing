@@ -33,6 +33,31 @@ public final class Constants {
   public final static class dismountConstants{
     public final static int kDismountMotorPort = 2;
   }
+
+  public final static class ElevatorConstants{
+    public final static int kPrimaryElevatorMotorPort = 0; // Port number for the primary elevator motor
+    public final static int kSecondaryElevatorMotorPort = 1; // Port number for the secondary elevator motor
+
+    // PID
+    public final static double kElevatorkp = 0;
+    public final static double kElevatorki = 0;
+    public final static double kElevatorkd = 0;
+
+    public final static double kElevatorIntakeHeightToGround_Meters = 101.1; // Height of the intake to the ground in meters
+
+    public static double kElevatorMotorEncoderRevToGearRev = 1 / 20;
+    public static double kElevatorSprocketPitchDiameter_inches = 1.751;
+    /** converts elevator gear revolutions to linear motion in inches */
+    public static double kElevatorGearRevToLinearMotion_Inches = kElevatorSprocketPitchDiameter_inches * Math.PI;
+    /**
+     * Conversion from rotation of the primary elevator motor
+     * to meters. Used for getting current position of the tallest point on the
+     * to the ground
+     */
+    public static final double elevatorMotorRotationToMeters = kElevatorMotorEncoderRevToGearRev
+        * kElevatorGearRevToLinearMotion_Inches;
+
+  }
   
   }
 
