@@ -18,13 +18,16 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.Constants.PitcherConstants;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.armCommand;
 import frc.robot.commands.dismountCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.armSubsystem;
 import frc.robot.subsystems.dismountMotorSubsystem;
+import frc.robot.subsystems.intake_PitcherSubsystem;
 
 
 
@@ -33,6 +36,7 @@ public class RobotContainer {
   private armSubsystem armSub = new armSubsystem();
   private dismountMotorSubsystem dismountSub = new dismountMotorSubsystem();
   private ElevatorSubsystem elevatorSub = new ElevatorSubsystem();
+  private intake_PitcherSubsystem pitcherSub = new intake_PitcherSubsystem();
   
   private Joystick Controller1 = new Joystick(OIConstants.kControllerPort);
 
@@ -68,7 +72,10 @@ public class RobotContainer {
     Command scoreCoralLvl2CMD = new SequentialCommandGroup(
 
       new InstantCommand(() -> {
-        elevatorSub.setIntakeHeightToGround_Meters(50);
+        
+        elevatorSub.setIntakeHeightToGround_Meters(ElevatorConstants.kElevatorScoreLVL2CoralHeight_Meters);
+
+        pitcherSub.setIntakePitcherSetpoint_Degrees(PitcherConstants.kPitcherSetpoint_DegreesLVL2);
       }
     )
     );
