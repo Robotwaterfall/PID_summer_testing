@@ -57,6 +57,13 @@ public final class Constants {
     public static final double elevatorMotorRotationToMeters = kElevatorMotorEncoderRevToGearRev
         * kElevatorGearRevToLinearMotion_Inches;
 
+    public final static double kElevatorIntakeHeightSetpoint_Meters = 0.0; // Setpoint for the intake height in meters
+
+  }
+
+  public final static class PitcherConstants{
+    
+    public final static int kPitcherMotorPort = 3;
   }
   
   }

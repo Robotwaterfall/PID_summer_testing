@@ -58,6 +58,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     return intakeHeightToGround_Meters;
   }
 
+  public double getIntakeHeightSetpoint_Meters() {
+    return intakeHeightToGround_Meters;
+  }
+
   public void setIntakeHeightToGround_Meters(double intakeHeightToGround_Meters) {
     this.intakeHeightToGround_Meters = intakeHeightToGround_Meters;
   }

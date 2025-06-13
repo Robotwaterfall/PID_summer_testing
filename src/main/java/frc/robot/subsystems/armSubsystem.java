@@ -47,8 +47,8 @@ public class armSubsystem extends SubsystemBase {
     return pidController;
   }
 
-  public void getIsHoldPosition(boolean state){
-    isHoldPosition = state;
+  public boolean getIsHoldPosition(){
+    return isHoldPosition;
   }
 
   public double getArmSetPoint(){
@@ -59,5 +59,8 @@ public class armSubsystem extends SubsystemBase {
   armSetPoint_degress = newSetPoint_degress;
  }
 
+ public void setIsHoldPosition(boolean state){
+  isHoldPosition = state;
+ }
   
 }
