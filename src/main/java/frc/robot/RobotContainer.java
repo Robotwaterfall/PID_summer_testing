@@ -24,10 +24,12 @@ import frc.robot.Constants.PitcherConstants;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.armCommand;
 import frc.robot.commands.dismountCommand;
+import frc.robot.commands.powerConsumerCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.armSubsystem;
 import frc.robot.subsystems.dismountMotorSubsystem;
 import frc.robot.subsystems.intake_PitcherSubsystem;
+import frc.robot.subsystems.pitcher_ConsumerMotorSubsystem;
 
 
 
@@ -37,6 +39,7 @@ public class RobotContainer {
   private dismountMotorSubsystem dismountSub = new dismountMotorSubsystem();
   private ElevatorSubsystem elevatorSub = new ElevatorSubsystem();
   private intake_PitcherSubsystem pitcherSub = new intake_PitcherSubsystem();
+  private pitcher_ConsumerMotorSubsystem consumerSub = new pitcher_ConsumerMotorSubsystem();
   
   private Joystick Controller1 = new Joystick(OIConstants.kControllerPort);
 
@@ -49,6 +52,12 @@ public class RobotContainer {
 
 
   private void configureBindings(){
+
+    consumerSub.setDefaultCommand(
+      new powerConsumerCommand(consumerSub,
+      () ->  Controller1.getRawAxis(11),
+      () ->  Controller1.getRawAxis(12)));
+    
 
     Command dismountAlgaelvl2CMD = new SequentialCommandGroup(
 

@@ -71,6 +71,12 @@ public final class Constants {
 
     public final static double kPitcherSetpoint_DegreesLVL2 = 90; 
   }
+
+  public final static class PitcherConsumerConstants{
+
+    public final static int kPitcherConsumerMotor = 4;
+    
+  }
   
   }
 
