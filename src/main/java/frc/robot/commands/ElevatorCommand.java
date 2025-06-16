@@ -21,18 +21,18 @@ public class ElevatorCommand extends Command {
 
   private final SparkMax primaryElevatorMotor;
 
-  private final SparkMax secoundaryElevatorMotor;
+  private final double intakeHeightSetpoint_Meters;
 
 
-  public ElevatorCommand(ElevatorSubsystem elevatorSub, PIDController elevatorController, SparkMax primaryElevatorMotor, 
-  SparkMax secoundaryElevatorMotor) {
+  public ElevatorCommand(ElevatorSubsystem elevatorSub, PIDController elevatorController, double intakeHeightSetpoint_Inches) {
 
     this.elevatorSub = elevatorSub;
 
     this.elevatorController = elevatorSub.getElevatorController();
 
     this.primaryElevatorMotor = elevatorSub.getPrimaryElevatorMotor();
-    this.secoundaryElevatorMotor = elevatorSub.getSecoundaryElevatorMotor();
+
+    this.intakeHeightSetpoint_Meters = intakeHeightSetpoint_Inches;
 
     addRequirements(elevatorSub);
    
@@ -45,6 +45,8 @@ public class ElevatorCommand extends Command {
     primaryElevatorMotor.set(0);
     primaryElevatorMotor.stopMotor();
 
+    elevatorSub.setIntakeHeightToGround_Inches(intakeHeightSetpoint_Meters);
+
     SmartDashboard.putBoolean("idleHeightCMD", true);
   }
 
@@ -52,13 +54,13 @@ public class ElevatorCommand extends Command {
   @Override
   public void execute() {
     SmartDashboard.putData("elevatorController", elevatorController);
-    SmartDashboard.putNumber("intakeHeightSetpoint", elevatorSub.getIntakeHeightSetpoint_Meters());
+    SmartDashboard.putNumber("intakeHeightSetpoint", elevatorSub.getIntakeHeightSetpoint_Inches());
     SmartDashboard.putNumber("elevatorPosition_Meters", elevatorSub.getPrimaryElevatorPosition());
     SmartDashboard.putNumber("elevatorController_Error", elevatorController.getPositionError());
 
     double output = elevatorController.calculate(
       elevatorSub.getPrimaryElevatorPosition(),
-      elevatorSub.getIntakeHeightSetpoint_Meters()
+      elevatorSub.getIntakeHeightSetpoint_Inches()
     );
 
     primaryElevatorMotor.set(output);
@@ -75,6 +77,13 @@ public class ElevatorCommand extends Command {
 
   @Override
   public boolean isFinished() {
+
+    //if the current elevator position is less then or equal too it will end the command
+
+    if (Math.abs(elevatorController.getError()) <= 0.2){
+      return true;
+    }
+
     return false;
   }
 }

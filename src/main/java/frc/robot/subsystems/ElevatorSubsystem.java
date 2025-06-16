@@ -27,15 +27,20 @@ public class ElevatorSubsystem extends SubsystemBase {
     ElevatorConstants.kElevatorkd
   );
 
-  private double intakeHeightToGround_Meters = ElevatorConstants.kElevatorIntakeHeightToGround_Meters;
+  private double intakeHeightToGround_Meters = ElevatorConstants.kMinElevatorIntakeHeightToGround_Meters;
 
   public ElevatorSubsystem() {
+
+    // makes the secoundary elevator motor follow the primary motor inverted
     
     secondaryElevatorConfig.follow(ElevatorConstants.kPrimaryElevatorMotorPort, true);
 
+    //Converts the elevators rotations to Meters
+
     primaryElevatorConfig.encoder.positionConversionFactor(ElevatorConstants.elevatorMotorRotationToMeters);
 
-    secondaryElevatorMotor.configure(secondaryElevatorConfig, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+    secondaryElevatorMotor.configure(secondaryElevatorConfig, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, 
+    PersistMode.kNoPersistParameters);
   }
 
   public SparkMax getPrimaryElevatorMotor(){
@@ -58,12 +63,12 @@ public class ElevatorSubsystem extends SubsystemBase {
     return intakeHeightToGround_Meters;
   }
 
-  public double getIntakeHeightSetpoint_Meters() {
+  public double getIntakeHeightSetpoint_Inches() {
     return intakeHeightToGround_Meters;
   }
 
-  public void setIntakeHeightToGround_Meters(double intakeHeightToGround_Meters) {
-    this.intakeHeightToGround_Meters = intakeHeightToGround_Meters;
+  public void setIntakeHeightToGround_Inches(double heightSetpoint_Inches) {
+    this.intakeHeightToGround_Meters = heightSetpoint_Inches;
   }
 
   public void resetElevatorEncoders(){

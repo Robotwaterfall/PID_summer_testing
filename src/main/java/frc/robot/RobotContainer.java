@@ -24,6 +24,7 @@ import frc.robot.Constants.PitcherConstants;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.commands.armCommand;
 import frc.robot.commands.dismountCommand;
+import frc.robot.commands.idleElevatorHeightCommand;
 import frc.robot.commands.powerConsumerCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.armSubsystem;
@@ -57,6 +58,11 @@ public class RobotContainer {
       new powerConsumerCommand(consumerSub,
       () ->  Controller1.getRawAxis(11),
       () ->  Controller1.getRawAxis(12)));
+
+    elevatorSub.setDefaultCommand(
+      new idleElevatorHeightCommand(elevatorSub)
+    );
+
     
 
     Command dismountAlgaelvl2CMD = new SequentialCommandGroup(
@@ -82,7 +88,7 @@ public class RobotContainer {
 
       new InstantCommand(() -> {
         
-        elevatorSub.setIntakeHeightToGround_Meters(ElevatorConstants.kElevatorScoreLVL2CoralHeight_Meters);
+        elevatorSub.setIntakeHeightToGround_Inches(ElevatorConstants.kElevatorScoreLVL2CoralHeight_Meters);
 
         pitcherSub.setIntakePitcherSetpoint_Degrees(PitcherConstants.kPitcherSetpoint_DegreesLVL2);
       }

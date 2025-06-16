@@ -43,7 +43,7 @@ public final class Constants {
     public final static double kElevatorki = 0;
     public final static double kElevatorkd = 0;
 
-    public final static double kElevatorIntakeHeightToGround_Meters = 101.1; // Height of the intake to the ground in meters
+    public final static double kMinElevatorIntakeHeightToGround_Meters = 101.1; // Height of the intake to the ground in meters
 
     public static double kElevatorMotorEncoderRevToGearRev = 1 / 20;
     public static double kElevatorSprocketPitchDiameter_inches = 1.751;
@@ -76,6 +76,17 @@ public final class Constants {
 
     public final static int kPitcherConsumerMotor = 4;
     
+  }
+
+  public final static class ClimberConstants{
+
+    public final static int kPrimaryClimberMotor = 5;
+    public final static int kSecoundaryClimberMotor = 6;
+
+    public final static double kClimberKp = 0;
+    public final static double kClimberKi = 0;
+    public final static double kClimberKd = 0;
+
   }
   
   }
