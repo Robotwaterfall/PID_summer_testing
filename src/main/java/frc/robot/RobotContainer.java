@@ -28,6 +28,7 @@ import frc.robot.commands.idleElevatorHeightCommand;
 import frc.robot.commands.powerConsumerCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.armSubsystem;
+import frc.robot.subsystems.climberSubsystem;
 import frc.robot.subsystems.dismountMotorSubsystem;
 import frc.robot.subsystems.intake_PitcherSubsystem;
 import frc.robot.subsystems.pitcher_ConsumerMotorSubsystem;
@@ -41,6 +42,7 @@ public class RobotContainer {
   private ElevatorSubsystem elevatorSub = new ElevatorSubsystem();
   private intake_PitcherSubsystem pitcherSub = new intake_PitcherSubsystem();
   private pitcher_ConsumerMotorSubsystem consumerSub = new pitcher_ConsumerMotorSubsystem();
+  private climberSubsystem climbSub = new climberSubsystem();
   
   private Joystick Controller1 = new Joystick(OIConstants.kControllerPort);
 
@@ -94,10 +96,19 @@ public class RobotContainer {
       }
     )
     );
-    
+
+    Command climbtheReef = new SequentialCommandGroup(
+      
+     new InstantCommand(() -> {
+      climbSub.setClimbSetpoint_Degress();
+     }
+    )
+    );
     new JoystickButton(Controller1, 1).onTrue(dismountAlgaelvl2CMD);
 
     new JoystickButton(Controller1, 2).onTrue(scoreCoralLvl2CMD);
+
+    new JoystickButton(Controller1, 3).onTrue(climbtheReef);
   }
 
 
